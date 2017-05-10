@@ -16,7 +16,11 @@ case class Time(t: Double) {
   
 }
 
-case class OrderProcessingTime(pt: Double) extends AnyVal
+case class OrderProcessingTime(pt: Double) extends Ordered[OrderProcessingTime] {
+  
+  override def compare(that: OrderProcessingTime) = pt.compareTo(that.pt)
+  
+}
 
 case class Customer(arrivalTime: Time, orderProcessingTime: OrderProcessingTime)
 
