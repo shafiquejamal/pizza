@@ -8,7 +8,7 @@ class ServedCustomersUTest extends FlatSpec with ShouldMatchers {
   "divided by the number of customers, otherwise" in new CustomerFixture {
     
     noServedCustomers.averageWaitTime shouldBe 0
-    servedCustomers.averageWaitTime shouldEqual 9
+    servedCustomers1.averageWaitTime shouldEqual 9
   }
   
 }
