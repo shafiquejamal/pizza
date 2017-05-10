@@ -22,6 +22,12 @@ case class ServedCustomers(served: Seq[ServedCustomer]) {
   
 }
 
+object ServedCustomers {
+  
+  def apply(servedCustomer: ServedCustomer): ServedCustomers = ServedCustomers(Seq(servedCustomer))
+  
+}
+
 case class Queue(customers: Seq[Customer], currentTime: Time, servedCustomers: ServedCustomers) {
   
   def visibleCustomers: Seq[Customer] = customers.filter( customer => customer.arrivalTime isOnOrBefore currentTime )

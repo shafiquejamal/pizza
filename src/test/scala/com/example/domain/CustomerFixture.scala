@@ -11,7 +11,7 @@ trait CustomerFixture {
   val sC1 = ServedCustomer(c1, 17)
   
   val customers = Seq(c2, c1, c0)
-  val noServedCustomers = ServedCustomers(Seq())
+  val noServedCustomers = ServedCustomers(Seq[ServedCustomer]())
   
   val servedCustomers = ServedCustomers(Seq(sC0, sC2, sC1))
   
