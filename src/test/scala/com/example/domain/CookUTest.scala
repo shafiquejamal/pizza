@@ -17,4 +17,14 @@ class CookUTest extends FlatSpec with ShouldMatchers {
     
   }
 
+  "Processing the next customer" should "select the customer with the shortest order processing time, advance the " +
+  "time by that amount, calculate the customers wait time, then move that customers to the served customers list" in
+  new CustomerFixture {
+  
+    val q = Queue(customers, Time(0), noServedCustomers)
+    val qExpectedAfterFirstServed = Queue(customers.filterNot(_ == c0), Time(3), ServedCustomers(ServedCustomer(c0, 3)))
+    Cook.processNextCustomer(q) shouldEqual qExpectedAfterFirstServed
+  
+  }
+  
 }

@@ -21,6 +21,18 @@ object Cook {
     }
   }
   
-  def processNextCustomer(queue: Queue): Queue = ???
+  def processNextCustomer(queue: Queue): Queue = {
+    val lowestPizzaMakingTime = queue.visibleCustomers.map(_.orderProcessingTime.pt).min
+    val maybeNextCustomer = queue.visibleCustomers.find(_.orderProcessingTime.pt == lowestPizzaMakingTime)
+    maybeNextCustomer.fold {
+      queue
+    } { customer =>
+      val newTime = queue.currentTime + customer.orderProcessingTime
+      val newVisibleCustomers = queue.visibleCustomers(newTime).filterNot{ c => c == customer }
+      val customerWaitTime = newTime - customer.arrivalTime
+      val newServedCustomers = queue.servedCustomers + ServedCustomer(customer, customerWaitTime)
+      Queue(newVisibleCustomers, newTime, newServedCustomers)
+    }
+  }
   
 }
