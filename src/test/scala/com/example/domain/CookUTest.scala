@@ -40,4 +40,11 @@ class CookUTest extends FlatSpec with ShouldMatchers {
   
   }
   
+  "Serving all the customers" should "yield the correct average wait time" in new CustomerFixture {
+    
+    Cook serve qSampleInput1.customers shouldEqual 9
+    Cook serve qSampleInput2.customers shouldEqual 8
+    
+  }
+  
 }

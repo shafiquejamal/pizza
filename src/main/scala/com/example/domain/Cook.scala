@@ -1,7 +1,15 @@
 package com.example.domain
 
+import scala.annotation.tailrec
+
 object Cook {
   
+  def serve(customers: Seq[Customer]): ServedCustomers = {
+    val queue = Queue(customers, Time(0), ServedCustomers(Seq()))
+    process(queue).servedCustomers
+  }
+  
+  @tailrec
   def process(queue: Queue): Queue = {
     if (queue.customers.isEmpty) {
       queue
